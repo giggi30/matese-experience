@@ -6,21 +6,21 @@ export const LOCATIONS: LocationData[] = [
     name: 'Bocca della Selva',
     description: 'Immersi nei boschi, dove il tempo si ferma. Il punto di partenza ideale per connettersi con la natura selvaggia.',
     activities: ['Giro a cavallo sulla neve', 'Bar-ristorante tipico', 'Noleggio MTB invernali', 'Picnic con area BBQ attrezzata'],
-    image: 'immagini/bocca della selva.jpeg'
+    image: '/immagini/bocca della selva.jpeg'
   },
   {
     id: 'lago',
     name: 'Lago del Matese',
     description: 'Lo specchio d’acqua più alto d’Italia, un luogo magico dove il cielo tocca le montagne.',
     activities: ['Picnic vista lago', 'Giro in barca a remi (meteo permettendo)', 'Giochi di gruppo all’aperto', 'Passeggiate fotografiche'],
-    image: 'immagini/lago del matese.jpeg'
+    image: '/immagini/lago del matese.jpeg'
   },
   {
     id: 'campitello',
     name: 'Campitello Matese',
     description: 'Il cuore pulsante del divertimento invernale, tra sci, buona cucina e adrenalina.',
     activities: ['Sci con impianti di risalita', 'Ristorante Km0 (Tartufo e Funghi)', 'Giochi sulla neve', 'Giro in Quad di gruppo'],
-    image: 'immagini/campitello matese.jpeg'
+    image: '/immagini/campitello matese.jpeg'
   }
 ];
 
@@ -72,7 +72,7 @@ export const ACCOMMODATIONS: AccommodationData[] = [
     type: 'Appartamenti Gilardi',
     rating: 9.7,
     distance: '1 minuto a piedi',
-    image: 'immagini/gilardi apartments.jpg',
+    image: '/immagini/gilardi apartments.jpg',
     priceLevel: '€€',
     bookingUrl: 'https://www.booking.com/Share-eP1SFBn'
   },
@@ -83,7 +83,7 @@ export const ACCOMMODATIONS: AccommodationData[] = [
     type: 'Chalet vista lago',
     rating: 9.4,
     distance: '1km dal lago',
-    image: 'immagini/chalet vista lago.jpg',
+    image: '/immagini/chalet vista lago.jpg',
     priceLevel: '€',
     bookingUrl: 'https://www.booking.com/Share-PIHCjft'
   },
@@ -94,7 +94,7 @@ export const ACCOMMODATIONS: AccommodationData[] = [
     type: 'La Pinetina',
     rating: 9.0,
     distance: 'Accesso diretto alle piste',
-    image: 'immagini/la pinetina.jpg',
+    image: '/immagini/la pinetina.jpg',
     priceLevel: '€€€',
     bookingUrl: 'https://www.booking.com/Share-VnjcZVi'
   }
