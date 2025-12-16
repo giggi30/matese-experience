@@ -4,10 +4,12 @@ import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { Home } from './pages/Home';
 import { Itinerary } from './pages/Itinerary';
+import { ScrollToTop } from './components/ScrollToTop';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
+      <ScrollToTop />
       <div className="min-h-screen bg-white text-gray-900 font-sans scroll-smooth">
         <Navigation />
         <Routes>
