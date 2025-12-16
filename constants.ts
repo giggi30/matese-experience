@@ -13,7 +13,7 @@ export const LOCATIONS: LocationData[] = [
     name: 'Lago del Matese',
     description: 'Lo specchio d’acqua più alto d’Italia, un luogo magico dove il cielo tocca le montagne.',
     activities: ['Picnic vista lago', 'Giro in barca a remi (meteo permettendo)', 'Giochi di gruppo all’aperto', 'Passeggiate fotografiche'],
-    image: '/immagini/lago del matese.jpeg'
+    image: '/immagini/pettone e io.JPG'
   },
   {
     id: 'campitello',
