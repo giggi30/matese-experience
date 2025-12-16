@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { CalendarCheck, Users, Map } from 'lucide-react';
 
 export const Experience: React.FC = () => {
@@ -20,7 +21,8 @@ export const Experience: React.FC = () => {
             {
               icon: Map,
               title: "Itinerario Ottimizzato",
-              desc: "Tre tappe strategiche per vedere il meglio del Matese senza stressare gli spostamenti."
+              desc: "Tre tappe strategiche per vedere il meglio del Matese senza stressare gli spostamenti.",
+              link: "/itinerary"
             },
             {
               icon: Users,
@@ -33,13 +35,28 @@ export const Experience: React.FC = () => {
               desc: "Dalle attività ai suggerimenti per dormire, abbiamo già selezionato il meglio per te."
             }
           ].map((item, idx) => (
-            <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-ice-100 text-center">
-              <div className="w-16 h-16 bg-ice-100 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold">
-                <item.icon className="w-8 h-8" />
+            item.link ? (
+              <Link key={idx} to={item.link} className="block group">
+                <div className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-ice-100 text-center h-full group-hover:border-brand-gold/50">
+                  <div className="w-16 h-16 bg-ice-100 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold group-hover:bg-brand-gold group-hover:text-white transition-colors">
+                    <item.icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-bold text-brand-dark mb-3 flex items-center justify-center gap-2">
+                    {item.title}
+                    <span className="text-xs bg-brand-gold text-white px-2 py-0.5 rounded-full">NOVITÀ</span>
+                  </h3>
+                  <p className="text-gray-600">{item.desc}</p>
+                </div>
+              </Link>
+            ) : (
+              <div key={idx} className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-md transition-shadow border border-ice-100 text-center h-full">
+                <div className="w-16 h-16 bg-ice-100 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold">
+                  <item.icon className="w-8 h-8" />
+                </div>
+                <h3 className="text-xl font-bold text-brand-dark mb-3">{item.title}</h3>
+                <p className="text-gray-600">{item.desc}</p>
               </div>
-              <h3 className="text-xl font-bold text-brand-dark mb-3">{item.title}</h3>
-              <p className="text-gray-600">{item.desc}</p>
-            </div>
+            )
           ))}
         </div>
       </div>
