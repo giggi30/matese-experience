@@ -24,6 +24,7 @@ export const Navigation: React.FC = () => {
     { name: 'Pacchetti', href: '/#packages' },
     { name: 'Gruppi', href: '/#groups' },
     { name: 'Dormire', href: '/#sleep' },
+    { name: 'Piatti Tipici', href: '/#sapori-matese' },
   ];
 
   return (

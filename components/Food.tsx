@@ -2,7 +2,7 @@ import React from 'react';
 
 export const Food: React.FC = () => {
   return (
-    <section className="py-20 bg-white">
+    <section id="sapori-matese" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row items-center gap-12">
           <div className="w-full md:w-1/2">

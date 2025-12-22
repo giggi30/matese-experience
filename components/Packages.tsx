@@ -57,7 +57,7 @@ export const Packages: React.FC = () => {
         </div>
 
         {/* Group Special Section */}
-        <div id="groups" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group">
+        <div id="groups" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img
