@@ -4,7 +4,7 @@ export const LOCATIONS: LocationData[] = [
   {
     id: 'bocca',
     name: 'Bocca della Selva',
-    description: 'Immersi nei boschi, dove il tempo si ferma. Il punto di partenza ideale per connettersi con la natura selvaggia.',
+    description: 'Immersi nei boschi, dove il tempo si ferma. Il punto di partenza ideale per connettersi con la natura incontaminata.',
     activities: ['Giro a cavallo sulla neve', 'Bar-ristorante tipico', 'Noleggio MTB invernali', 'Picnic con area BBQ attrezzata'],
     image: '/immagini/bocca della selva.jpeg'
   },
