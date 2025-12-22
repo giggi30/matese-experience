@@ -4,6 +4,7 @@ import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
 import { Home } from './pages/Home';
 import { Itinerary } from './pages/Itinerary';
+import { MeteoPage } from './pages/MeteoPage';
 import { ScrollToTop } from './components/ScrollToTop';
 
 const App: React.FC = () => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/itinerary" element={<Itinerary />} />
+          <Route path="/meteo" element={<MeteoPage />} />
         </Routes>
         <Footer />
       </div>
