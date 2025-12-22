@@ -21,7 +21,6 @@ export const Navigation: React.FC = () => {
     { name: 'Esperienza', href: '/#experience' },
     { name: 'Itinerario', href: '/#itinerary' },
     { name: 'Meteo', href: '/meteo' },
-    { name: 'Pacchetti', href: '/#packages' },
     { name: 'Gruppi', href: '/#groups' },
     { name: 'Dormire', href: '/#sleep' },
     { name: 'Piatti Tipici', href: '/#sapori-matese' },
