@@ -1,5 +1,6 @@
 import React from 'react';
 import { PACKAGES, GROUP_PACKAGE } from '../constants';
+import { Link } from 'react-router-dom';
 import { Check, Star } from 'lucide-react';
 
 export const Packages: React.FC = () => {
@@ -49,9 +50,12 @@ export const Packages: React.FC = () => {
                 ))}
               </ul>
 
-              <button className={`w-full py-3 rounded-xl font-bold transition-colors ${pkg.highlight ? 'bg-brand-gold hover:bg-yellow-600 text-white' : 'bg-white text-brand-dark hover:bg-gray-100'}`}>
+              <Link
+                to={`/purchase?package=${pkg.id}`}
+                className={`block text-center w-full py-3 rounded-xl font-bold transition-colors ${pkg.highlight ? 'bg-brand-gold hover:bg-yellow-600 text-white' : 'bg-white text-brand-dark hover:bg-gray-100'}`}
+              >
                 Scegli Pacchetto
-              </button>
+              </Link>
             </div>
           ))}
         </div>
@@ -98,9 +102,12 @@ export const Packages: React.FC = () => {
             <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[280px] shadow-xl">
               <p className="text-sm text-teal-100 mb-2">A partire da</p>
               <p className="text-4xl font-bold text-white mb-6">€39<span className="text-lg font-normal text-teal-200">/persona</span></p>
-              <button className="w-full py-3 bg-white text-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg">
+              <Link
+                to="/purchase?package=pkg-group"
+                className="block text-center w-full py-3 bg-white text-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
+              >
                 Richiedi Disponibilità
-              </button>
+              </Link>
             </div>
           </div>
         </div>

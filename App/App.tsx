@@ -5,6 +5,7 @@ import { Footer } from '../components/Footer';
 import { Contacts } from '../components/Contacts';
 import { Home } from './pages/Home';
 import { Itinerary } from './pages/Itinerary';
+import { Purchase } from './pages/Purchase';
 import { MeteoPage } from './pages/MeteoPage';
 import { ScrollToTop } from './components/ScrollToTop';
 
@@ -17,6 +18,7 @@ const App: React.FC = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/itinerary" element={<Itinerary />} />
+          <Route path="/purchase" element={<Purchase />} />
           <Route path="/meteo" element={<MeteoPage />} />
         </Routes>
         <Contacts />
