@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { Navigation } from '../components/Navigation';
 import { Footer } from '../components/Footer';
+import { Contacts } from '../components/Contacts';
 import { Home } from './pages/Home';
 import { Itinerary } from './pages/Itinerary';
 import { MeteoPage } from './pages/MeteoPage';
@@ -18,9 +19,10 @@ const App: React.FC = () => {
           <Route path="/itinerary" element={<Itinerary />} />
           <Route path="/meteo" element={<MeteoPage />} />
         </Routes>
+        <Contacts />
         <Footer />
       </div>
-    </BrowserRouter>
+    </BrowserRouter >
   );
 };
 
