@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { PACKAGES, LOCATIONS, ACCOMMODATIONS, GROUP_PACKAGE } from '../../constants';
+import { PACKAGES, LOCATIONS, ACCOMMODATIONS, GROUP_PACKAGE, SUMMER_PACKAGE } from '../../constants';
 import { Calendar, Users, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const Purchase: React.FC = () => {
@@ -19,13 +19,13 @@ export const Purchase: React.FC = () => {
         guests: 2,
         notes: ''
     });
-    const [selectedLocationId, setSelectedLocationId] = useState<string>('');
+    const [selectedLocationIds, setSelectedLocationIds] = useState<string[]>([]);
     const [selectedAccommodationId, setSelectedAccommodationId] = useState<string>('');
     const [selectedActivities, setSelectedActivities] = useState<string[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Derive selected package data
-    const selectedPackage = [...PACKAGES, GROUP_PACKAGE].find(p => p.id === selectedPackageId);
+    const selectedPackage = [...PACKAGES, GROUP_PACKAGE, SUMMER_PACKAGE].find(p => p.id === selectedPackageId);
 
     // Effects
     useEffect(() => {
@@ -36,16 +36,56 @@ export const Purchase: React.FC = () => {
 
     // Reset location/activities when package changes
     useEffect(() => {
-        setSelectedLocationId('');
+        setSelectedLocationIds([]);
         setSelectedActivities([]);
-        // For packages that include specific locations automatically, we could pre-select them here
-        // But for now, we'll keep it simple and let the user/logic decide
+
+        // Enforce minimum and maximum guests for group packages
+        if (selectedPackageId === GROUP_PACKAGE.id || selectedPackageId === SUMMER_PACKAGE.id) {
+            setFormData(prev => ({ ...prev, guests: Math.min(Math.max(prev.guests, 8), 20) }));
+        }
     }, [selectedPackageId]);
 
     // Handlers
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value } = e.target;
+
+        if (name === 'date' && selectedPackageId === 'pkg-2') {
+            const date = new Date(value);
+            const day = date.getDay(); // 0 = Sunday, 6 = Saturday
+            if (day !== 5 && day !== 6) {
+                alert('Per il pacchetto Weekend, seleziona un Venerdì o un Sabato per il check-in.');
+                return;
+            }
+        }
+
         setFormData(prev => ({ ...prev, [name]: value }));
+    };
+
+    const handleLocationToggle = (locationId: string) => {
+        if (selectedPackageId === 'pkg-1') {
+            // Single selection
+            setSelectedLocationIds([locationId]);
+        } else if (selectedPackageId === 'pkg-2') {
+            // Multi selection (max 2)
+            setSelectedLocationIds(prev => {
+                if (prev.includes(locationId)) {
+                    return prev.filter(id => id !== locationId);
+                } else {
+                    if (prev.length >= 2) return prev;
+                    return [...prev, locationId];
+                }
+            });
+        } else if (selectedPackageId === SUMMER_PACKAGE.id) {
+            // Summer package: Multi selection (max 3)
+            setSelectedLocationIds(prev => {
+                if (prev.includes(locationId)) {
+                    return prev.filter(id => id !== locationId);
+                } else {
+                    if (prev.length >= 3) return prev;
+                    return [...prev, locationId];
+                }
+            });
+        }
     };
 
     const handleActivityToggle = (activity: string) => {
@@ -66,7 +106,7 @@ export const Purchase: React.FC = () => {
         console.log('Booking Data:', {
             package: selectedPackage,
             user: formData,
-            location: selectedLocationId,
+            locations: selectedLocationIds,
             accommodation: selectedAccommodationId,
             activities: selectedActivities
         });
@@ -77,24 +117,10 @@ export const Purchase: React.FC = () => {
     };
 
     // Helper to determine available locations based on package
-    const getAvailableLocations = () => {
-        if (!selectedPackage) return [];
-
-        // Logic based on package type (assumed from ID or properties)
-        if (selectedPackage.id === 'pkg-1') {
-            // Assaggio: User chooses 1 location
-            return LOCATIONS;
-        } else if (selectedPackage.id === 'pkg-2') {
-            // Weekend: Lago + Campitello
-            return LOCATIONS.filter(l => l.id === 'lago' || l.id === 'campitello');
-        } else {
-            // Experience / Group: All locations
-            return LOCATIONS;
-        }
-    };
+    const getAvailableLocations = () => LOCATIONS;
 
     // Helper to decide if we need to show location selector (for single location packages)
-    const needsLocationSelection = selectedPackage?.id === 'pkg-1';
+    const needsLocationSelection = selectedPackage?.id === 'pkg-1' || selectedPackage?.id === 'pkg-2';
 
     return (
         <div className="pt-24 pb-20 bg-ice-50 min-h-screen">
@@ -204,6 +230,14 @@ export const Purchase: React.FC = () => {
                                             name="date"
                                             value={formData.date}
                                             onChange={handleInputChange}
+                                            min={
+                                                selectedPackage?.id === GROUP_PACKAGE.id ? "2026-12-01" :
+                                                    selectedPackage?.id === SUMMER_PACKAGE.id ? "2026-08-01" : undefined
+                                            }
+                                            max={
+                                                selectedPackage?.id === GROUP_PACKAGE.id ? "2026-12-31" :
+                                                    selectedPackage?.id === SUMMER_PACKAGE.id ? "2026-08-31" : undefined
+                                            }
                                             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-gold focus:border-transparent"
                                         />
                                     </div>
@@ -214,7 +248,8 @@ export const Purchase: React.FC = () => {
                                             <input
                                                 required
                                                 type="number"
-                                                min="1"
+                                                min={selectedPackage?.id === GROUP_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 8 : 1}
+                                                max={selectedPackage?.id === GROUP_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 20 : undefined}
                                                 name="guests"
                                                 value={formData.guests}
                                                 onChange={handleInputChange}
@@ -232,28 +267,44 @@ export const Purchase: React.FC = () => {
                                         <span className="bg-brand-gold text-white w-8 h-8 rounded-full flex items-center justify-center text-sm">3</span>
                                         Scegli la Tappa
                                     </h2>
-                                    <p className="text-gray-600 mb-6">Il pacchetto "Assaggio del Matese" prevede una sola tappa. Dove vuoi andare?</p>
+                                    <p className="text-gray-600 mb-6">
+                                        {selectedPackageId === 'pkg-1'
+                                            ? 'Il pacchetto "Assaggio del Matese" prevede una sola tappa. Dove vuoi andare?'
+                                            : 'Scegli 2 tappe per il tuo Weekend.'}
+                                    </p>
 
                                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                                        {LOCATIONS.map(loc => (
-                                            <div
-                                                key={loc.id}
-                                                onClick={() => setSelectedLocationId(loc.id)}
-                                                className={`cursor-pointer rounded-xl overflow-hidden border-2 transition-all ${selectedLocationId === loc.id ? 'border-brand-gold ring-2 ring-brand-gold/20' : 'border-transparent hover:border-gray-200'}`}
-                                            >
-                                                <div className="h-32 bg-gray-200 relative">
-                                                    <img src={loc.image} alt={loc.name} className="w-full h-full object-cover" />
-                                                    {selectedLocationId === loc.id && (
-                                                        <div className="absolute inset-0 bg-brand-gold/20 flex items-center justify-center">
-                                                            <CheckCircle2 className="w-10 h-10 text-white drop-shadow-md" />
-                                                        </div>
-                                                    )}
+                                        {LOCATIONS.map(loc => {
+                                            const isWeekend = selectedPackageId === 'pkg-2';
+                                            const isFull = isWeekend && selectedLocationIds.length >= 2;
+                                            const isDisabled = isFull && !selectedLocationIds.includes(loc.id);
+
+                                            return (
+                                                <div
+                                                    key={loc.id}
+                                                    onClick={() => !isDisabled && handleLocationToggle(loc.id)}
+                                                    className={`rounded-xl overflow-hidden border-2 transition-all ${isDisabled
+                                                        ? 'opacity-40 grayscale cursor-not-allowed'
+                                                        : 'cursor-pointer hover:border-gray-200'
+                                                        } ${selectedLocationIds.includes(loc.id)
+                                                            ? 'border-brand-gold ring-2 ring-brand-gold/20'
+                                                            : 'border-transparent'
+                                                        }`}
+                                                >
+                                                    <div className="h-32 bg-gray-200 relative">
+                                                        <img src={loc.image} alt={loc.name} className="w-full h-full object-cover" />
+                                                        {selectedLocationIds.includes(loc.id) && (
+                                                            <div className="absolute inset-0 bg-brand-gold/20 flex items-center justify-center">
+                                                                <CheckCircle2 className="w-10 h-10 text-white drop-shadow-md" />
+                                                            </div>
+                                                        )}
+                                                    </div>
+                                                    <div className="p-4 bg-white">
+                                                        <h4 className="font-bold text-brand-dark">{loc.name}</h4>
+                                                    </div>
                                                 </div>
-                                                <div className="p-4 bg-white">
-                                                    <h4 className="font-bold text-brand-dark">{loc.name}</h4>
-                                                </div>
-                                            </div>
-                                        ))}
+                                            );
+                                        })}
                                     </div>
                                 </div>
                             )}
@@ -266,29 +317,32 @@ export const Purchase: React.FC = () => {
                                 </h2>
 
                                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                    {ACCOMMODATIONS.map(acc => (
-                                        <div
-                                            key={acc.id}
-                                            onClick={() => setSelectedAccommodationId(acc.id)}
-                                            className={`cursor-pointer border rounded-xl overflow-hidden transition-all ${selectedAccommodationId === acc.id ? 'border-brand-gold ring-2 ring-brand-gold/20 shadow-md' : 'border-gray-200 hover:border-gray-300'}`}
-                                        >
-                                            <div className="h-40 relative">
-                                                <img src={acc.image} alt={acc.name} className="w-full h-full object-cover" />
-                                                {selectedAccommodationId === acc.id && (
-                                                    <div className="absolute top-2 right-2 bg-brand-gold text-white rounded-full p-1">
-                                                        <CheckCircle2 className="w-5 h-5" />
+                                    {ACCOMMODATIONS.map(acc => {
+                                        if (needsLocationSelection && selectedLocationIds.length > 0 && !selectedLocationIds.includes(acc.locationId)) return null;
+                                        return (
+                                            <div
+                                                key={acc.id}
+                                                onClick={() => setSelectedAccommodationId(acc.id)}
+                                                className={`cursor-pointer border rounded-xl overflow-hidden transition-all ${selectedAccommodationId === acc.id ? 'border-brand-gold ring-2 ring-brand-gold/20 shadow-md' : 'border-gray-200 hover:border-gray-300'}`}
+                                            >
+                                                <div className="h-40 relative">
+                                                    <img src={acc.image} alt={acc.name} className="w-full h-full object-cover" />
+                                                    {selectedAccommodationId === acc.id && (
+                                                        <div className="absolute top-2 right-2 bg-brand-gold text-white rounded-full p-1">
+                                                            <CheckCircle2 className="w-5 h-5" />
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div className="p-4">
+                                                    <span className="text-xs font-bold text-brand-gold uppercase">{acc.type}</span>
+                                                    <h3 className="font-bold text-brand-dark mb-1">{acc.name}</h3>
+                                                    <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
+                                                        <MapPin className="w-3 h-3" /> {acc.distance}
                                                     </div>
-                                                )}
-                                            </div>
-                                            <div className="p-4">
-                                                <span className="text-xs font-bold text-brand-gold uppercase">{acc.type}</span>
-                                                <h3 className="font-bold text-brand-dark mb-1">{acc.name}</h3>
-                                                <div className="flex items-center gap-1 text-xs text-gray-500 mb-2">
-                                                    <MapPin className="w-3 h-3" /> {acc.distance}
                                                 </div>
                                             </div>
-                                        </div>
-                                    ))}
+                                        );
+                                    })}
                                 </div>
                             </div>
 
@@ -303,8 +357,8 @@ export const Purchase: React.FC = () => {
                                 <div className="space-y-8">
                                     {getAvailableLocations().map(loc => {
                                         // Filter based on selection if needed
-                                        if (needsLocationSelection && selectedLocationId && loc.id !== selectedLocationId) return null;
-                                        if (needsLocationSelection && !selectedLocationId) return null;
+                                        if (needsLocationSelection && selectedLocationIds.length > 0 && !selectedLocationIds.includes(loc.id)) return null;
+                                        if (needsLocationSelection && selectedLocationIds.length === 0) return null;
 
                                         return (
                                             <div key={loc.id} className="border-b border-gray-100 pb-6 last:border-0 last:pb-0">
@@ -328,8 +382,8 @@ export const Purchase: React.FC = () => {
                                             </div>
                                         );
                                     })}
-                                    {needsLocationSelection && !selectedLocationId && (
-                                        <p className="text-gray-500 italic">Seleziona prima una tappa sopra per vedere le attività.</p>
+                                    {needsLocationSelection && selectedLocationIds.length === 0 && (
+                                        <p className="text-gray-500 italic">Seleziona prima le tappe sopra per vedere le attività.</p>
                                     )}
                                 </div>
                             </div>

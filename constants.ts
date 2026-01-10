@@ -30,16 +30,16 @@ export const PACKAGES: PackageData[] = [
     title: 'Assaggio del Matese',
     subtitle: 'Esperienza Giornaliera',
     duration: '1 Giorno',
-    price: '€49',
+    price: '€69',
     features: ['1 Tappa a scelta', 'Pranzo Tipico incluso', 'Attività guidata pomeridiana', 'Assistenza in loco'],
     highlight: false
   },
   {
     id: 'pkg-2',
-    title: 'Weekend sulla Neve',
+    title: 'Weekend in montagna',
     subtitle: 'Il Best Seller per Coppie',
     duration: '2 Giorni',
-    price: '€129',
+    price: '€189',
     features: ['2 Tappe (Lago + Campitello)', 'Pernottamento incluso (1 notte)', 'Cena tipica + Pranzi', 'Noleggio attrezzatura base'],
     highlight: true
   },
@@ -48,7 +48,7 @@ export const PACKAGES: PackageData[] = [
     title: 'Matese Experience Completa',
     subtitle: 'Immersione Totale',
     duration: '3 Giorni',
-    price: '€199',
+    price: '€349',
     features: ['Tour completo delle 3 tappe', '2 Notti in Chalet/Hotel', 'Tutte le attività incluse', 'Degustazione prodotti locali'],
     highlight: false
   }
@@ -59,8 +59,18 @@ export const GROUP_PACKAGE: PackageData = {
   title: 'Speciale Gruppi & Natale',
   subtitle: 'Ideale per 8-20 persone',
   duration: 'Personalizzabile',
-  price: 'da €39/persona',
+  price: 'da €329/persona',
   features: ['Sconti riservati per gruppi', 'Attività esclusive (Gara Quad, BBQ privato)', 'Area riservata al ristorante', 'Supporto organizzativo completo'],
+  isGroup: true
+};
+
+export const SUMMER_PACKAGE: PackageData = {
+  id: 'pkg-summer',
+  title: 'Summer Group Experience',
+  subtitle: 'Fuga dal Caldo (Gruppi 8-20)',
+  duration: '3 Giorni',
+  price: '€299',
+  features: ['3 Tappe (Full Experience)', '2 Pernottamenti inclusi', 'Attività estive outdoor', 'Degustazioni e relax'],
   isGroup: true
 };
 
