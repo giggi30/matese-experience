@@ -40,7 +40,7 @@ export const PACKAGES: PackageData[] = [
     subtitle: 'Il Best Seller per Coppie',
     duration: '2 Giorni',
     price: '€189',
-    features: ['2 Tappe (Lago + Campitello)', 'Pernottamento incluso (1 notte)', 'Cena tipica + Pranzi', 'Noleggio attrezzatura base'],
+    features: ['2 Tappe a scelta', 'Pernottamento incluso (1 notte)', 'Cena tipica + Pranzi', 'Noleggio attrezzatura base'],
     highlight: true
   },
   {
