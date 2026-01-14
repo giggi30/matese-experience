@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchParams, useNavigate, Link } from 'react-router-dom';
-import { PACKAGES, LOCATIONS, ACCOMMODATIONS, GROUP_PACKAGE, SUMMER_PACKAGE } from '../../constants';
+import { PACKAGES, LOCATIONS, ACCOMMODATIONS, CHRISTMAS_PACKAGE, SUMMER_PACKAGE } from '../../constants';
 import { Calendar, Users, MapPin, CheckCircle2, ArrowRight } from 'lucide-react';
 
 export const Purchase: React.FC = () => {
@@ -25,7 +25,7 @@ export const Purchase: React.FC = () => {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
     // Derive selected package data
-    const selectedPackage = [...PACKAGES, GROUP_PACKAGE, SUMMER_PACKAGE].find(p => p.id === selectedPackageId);
+    const selectedPackage = [...PACKAGES, CHRISTMAS_PACKAGE, SUMMER_PACKAGE].find(p => p.id === selectedPackageId);
 
     // Effects
     useEffect(() => {
@@ -40,7 +40,7 @@ export const Purchase: React.FC = () => {
         setSelectedActivities([]);
 
         // Enforce minimum and maximum guests for group packages
-        if (selectedPackageId === GROUP_PACKAGE.id || selectedPackageId === SUMMER_PACKAGE.id) {
+        if (selectedPackageId === CHRISTMAS_PACKAGE.id || selectedPackageId === SUMMER_PACKAGE.id) {
             setFormData(prev => ({ ...prev, guests: Math.min(Math.max(prev.guests, 8), 20) }));
         }
     }, [selectedPackageId]);
@@ -231,11 +231,11 @@ export const Purchase: React.FC = () => {
                                             value={formData.date}
                                             onChange={handleInputChange}
                                             min={
-                                                selectedPackage?.id === GROUP_PACKAGE.id ? "2026-12-01" :
+                                                selectedPackage?.id === CHRISTMAS_PACKAGE.id ? "2026-12-01" :
                                                     selectedPackage?.id === SUMMER_PACKAGE.id ? "2026-08-01" : undefined
                                             }
                                             max={
-                                                selectedPackage?.id === GROUP_PACKAGE.id ? "2026-12-31" :
+                                                selectedPackage?.id === CHRISTMAS_PACKAGE.id ? "2026-12-31" :
                                                     selectedPackage?.id === SUMMER_PACKAGE.id ? "2026-08-31" : undefined
                                             }
                                             className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-brand-gold focus:border-transparent"
@@ -248,8 +248,8 @@ export const Purchase: React.FC = () => {
                                             <input
                                                 required
                                                 type="number"
-                                                min={selectedPackage?.id === GROUP_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 8 : 1}
-                                                max={selectedPackage?.id === GROUP_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 20 : undefined}
+                                                min={selectedPackage?.id === CHRISTMAS_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 8 : 1}
+                                                max={selectedPackage?.id === CHRISTMAS_PACKAGE.id || selectedPackage?.id === SUMMER_PACKAGE.id ? 20 : undefined}
                                                 name="guests"
                                                 value={formData.guests}
                                                 onChange={handleInputChange}

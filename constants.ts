@@ -54,13 +54,13 @@ export const PACKAGES: PackageData[] = [
   }
 ];
 
-export const GROUP_PACKAGE: PackageData = {
-  id: 'pkg-group',
-  title: 'Speciale Gruppi & Natale',
+export const CHRISTMAS_PACKAGE: PackageData = {
+  id: 'pkg-christmas',
+  title: 'Christmas Group Experience',
   subtitle: 'Ideale per 8-20 persone',
   duration: 'Personalizzabile',
   price: 'da €329/persona',
-  features: ['Sconti riservati per gruppi', 'Attività esclusive (Gara Quad, BBQ privato)', 'Area riservata al ristorante', 'Supporto organizzativo completo'],
+  features: ['Sconti riservati per gruppi', 'Attività esclusive (Gara Quad, BBQ privato)', 'Area riservata al ristorante', '2 Pernottamenti inclusi'],
   isGroup: true
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { PACKAGES, GROUP_PACKAGE, SUMMER_PACKAGE } from '../constants';
+import { PACKAGES, CHRISTMAS_PACKAGE, SUMMER_PACKAGE } from '../constants';
 import { Link } from 'react-router-dom';
 import { Check, Snowflake, Star, Sun } from 'lucide-react';
 
@@ -60,8 +60,8 @@ export const Packages: React.FC = () => {
           ))}
         </div>
 
-        {/* Group Special Section */}
-        <div id="groups" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
+        {/* Christmas Special Section */}
+        <div id="christmas" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
             <img
@@ -83,14 +83,14 @@ export const Packages: React.FC = () => {
                 NATALE 2026
               </div>
               <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">
-                {GROUP_PACKAGE.title}
+                {CHRISTMAS_PACKAGE.title}
               </h3>
               <p className="text-teal-50 text-lg mb-6 max-w-lg">
                 Siete un gruppo di 8-20 persone? Abbiamo creato l'esperienza definitiva per divertirsi insieme.
                 Prezzi agevolati, attività esclusive e zero stress organizzativo.
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {GROUP_PACKAGE.features.map((f, i) => (
+                {CHRISTMAS_PACKAGE.features.map((f, i) => (
                   <div key={i} className="flex items-center gap-2 text-teal-50 font-medium">
                     <div className="w-2 h-2 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
                     {f}
@@ -103,7 +103,7 @@ export const Packages: React.FC = () => {
               <p className="text-sm text-teal-100 mb-2">A partire da</p>
               <p className="text-4xl font-bold text-white mb-6">€329<span className="text-lg font-normal text-teal-200">/persona</span></p>
               <Link
-                to="/purchase?package=pkg-group"
+                to="/purchase?package=pkg-christmas"
                 className="block text-center w-full py-3 bg-white text-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
               >
                 Richiedi Disponibilità
