@@ -131,5 +131,19 @@ export const REVIEWS: ReviewData[] = [
     role: "Famiglia con bambini",
     text: "Bellissima esperienza anche per i bambini. Bocca della Selva è incantata con la neve. Ottimo cibo.",
     rating: 4
+  },
+  {
+    id: 4,
+    author: "Alessio",
+    role: "Viaggiatore Solitario",
+    text: "Cercavo pace e l'ho trovata al Lago del Matese. I tramonti lì hanno un'energia unica. Tornerò per il foliage.",
+    rating: 5
+  },
+  {
+    id: 5,
+    author: "Chiara",
+    role: "Solo Traveler",
+    text: "Campitello offre il giusto mix di sport e relax. Ho adorato sciare al mattino e leggere davanti al camino il pomeriggio.",
+    rating: 5
   }
 ];
