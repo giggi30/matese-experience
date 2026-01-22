@@ -17,7 +17,7 @@ export const Testimonials: React.FC = () => {
   ]);
 
   return (
-    <section className="py-20 bg-brand-dark text-white overflow-hidden">
+    <section id="reviews" className="py-20 bg-brand-dark text-white overflow-hidden">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-serif font-bold">Cosa dicono di noi</h2>
