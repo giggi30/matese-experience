@@ -60,109 +60,112 @@ export const Packages: React.FC = () => {
           ))}
         </div>
 
-        {/* Christmas Special Section */}
-        <div id="christmas" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
-          {/* Background Image */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="immagini/pacchetto natale.jpeg"
-              alt="Natale sul Matese"
-              className="w-full h-[500px] object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-teal-900/90 to-emerald-900/80 mix-blend-multiply"></div>
-          </div>
-
-
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
-            <Snowflake className="w-96 h-96 text-white rotate-12" />
-          </div>
-
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex-1">
-              <div className="inline-block bg-teal-500/20 text-teal-300 font-bold px-3 py-1 rounded-full text-sm mb-4 backdrop-blur-sm border border-teal-500/30">
-                NATALE 2026
-              </div>
-              <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">
-                {CHRISTMAS_PACKAGE.title}
-              </h3>
-              <p className="text-teal-50 text-lg mb-6 max-w-lg">
-                Siete un gruppo di 8-20 persone? Abbiamo creato l'esperienza definitiva per divertirsi insieme.
-                Prezzi agevolati, attività esclusive e zero stress organizzativo.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {CHRISTMAS_PACKAGE.features.map((f, i) => (
-                  <div key={i} className="flex items-center gap-2 text-teal-50 font-medium">
-                    <div className="w-2 h-2 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
-                    {f}
-                  </div>
-                ))}
-              </div>
+        {/* Group Experience Sections */}
+        <div id="groups" className="space-y-20 scroll-mt-32">
+          {/* Christmas Special Section */}
+          <div id="christmas" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src="immagini/pacchetto natale.jpeg"
+                alt="Natale sul Matese"
+                className="w-full h-[500px] object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-900/90 to-emerald-900/80 mix-blend-multiply"></div>
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[280px] shadow-xl">
-              <p className="text-sm text-teal-100 mb-2">A partire da</p>
-              <p className="text-4xl font-bold text-white mb-6">€329<span className="text-lg font-normal text-teal-200">/persona</span></p>
-              <Link
-                to="/purchase?package=pkg-christmas"
-                className="block text-center w-full py-3 bg-white text-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
-              >
-                Richiedi Disponibilità
-              </Link>
-            </div>
-          </div>
-        </div>
 
-        {/* Summer Group Special Section */}
-        <div id="summer" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group mt-20 scroll-mt-32">
-          {/* Background Image */}
-          <div className="absolute inset-0 z-0">
-            <img
-              src="immagini/summer_group.jpeg"
-              alt="Estate sul Matese"
-              className="w-full h-[500px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
-            />
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-900/90 to-amber-900/80 mix-blend-multiply"></div>
-          </div>
-
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
-            <div className="w-96 h-96 bg-yellow-500 rounded-full blur-3xl"></div>
-          </div>
-
-          <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
-            <Sun className="w-96 h-96 text-white rotate-12" />
-          </div>
-
-          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
-            <div className="flex-1">
-              <div className="inline-block bg-orange-500/20 text-orange-200 font-bold px-3 py-1 rounded-full text-sm mb-4 backdrop-blur-sm border border-orange-500/30">
-                ESTATE 2026
-              </div>
-              <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">
-                {SUMMER_PACKAGE.title}
-              </h3>
-              <p className="text-orange-50 text-lg mb-6 max-w-lg">
-                Siete un gruppo in cerca di fresco e avventura? Vivete il Matese estivo tra escursioni, relax e degustazioni.
-                Un'esperienza completa e autentica, lontano dal caldo afoso della città.
-              </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
-                {SUMMER_PACKAGE.features.map((f, i) => (
-                  <div key={i} className="flex items-center gap-2 text-orange-50 font-medium">
-                    <div className="w-2 h-2 bg-orange-400 rounded-full shadow-[0_0_10px_rgba(251,146,60,0.5)]"></div>
-                    {f}
-                  </div>
-                ))}
-              </div>
+            <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
+              <Snowflake className="w-96 h-96 text-white rotate-12" />
             </div>
 
-            <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[280px] shadow-xl">
-              <p className="text-sm text-orange-100 mb-2">A partire da</p>
-              <p className="text-4xl font-bold text-white mb-6">€299<span className="text-lg font-normal text-orange-200">/persona</span></p>
-              <Link
-                to="/purchase?package=pkg-summer"
-                className="block text-center w-full py-3 bg-white text-orange-900 font-bold rounded-xl hover:bg-orange-50 transition-colors shadow-lg"
-              >
-                Richiedi Disponibilità
-              </Link>
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex-1">
+                <div className="inline-block bg-teal-500/20 text-teal-300 font-bold px-3 py-1 rounded-full text-sm mb-4 backdrop-blur-sm border border-teal-500/30">
+                  NATALE 2026
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">
+                  {CHRISTMAS_PACKAGE.title}
+                </h3>
+                <p className="text-teal-50 text-lg mb-6 max-w-lg">
+                  Siete un gruppo di 8-20 persone? Abbiamo creato l'esperienza definitiva per divertirsi insieme.
+                  Prezzi agevolati, attività esclusive e zero stress organizzativo.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {CHRISTMAS_PACKAGE.features.map((f, i) => (
+                    <div key={i} className="flex items-center gap-2 text-teal-50 font-medium">
+                      <div className="w-2 h-2 bg-teal-400 rounded-full shadow-[0_0_10px_rgba(45,212,191,0.5)]"></div>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[280px] shadow-xl">
+                <p className="text-sm text-teal-100 mb-2">A partire da</p>
+                <p className="text-4xl font-bold text-white mb-6">€329<span className="text-lg font-normal text-teal-200">/persona</span></p>
+                <Link
+                  to="/purchase?package=pkg-christmas"
+                  className="block text-center w-full py-3 bg-white text-teal-900 font-bold rounded-xl hover:bg-teal-50 transition-colors shadow-lg"
+                >
+                  Richiedi Disponibilità
+                </Link>
+              </div>
+            </div>
+          </div>
+
+          {/* Summer Group Special Section */}
+          <div id="summer" className="relative rounded-3xl p-8 md:p-12 overflow-hidden shadow-2xl group scroll-mt-32">
+            {/* Background Image */}
+            <div className="absolute inset-0 z-0">
+              <img
+                src="immagini/summer_group.jpeg"
+                alt="Estate sul Matese"
+                className="w-full h-[500px] object-cover object-center transition-transform duration-700 group-hover:scale-105"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-900/90 to-amber-900/80 mix-blend-multiply"></div>
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
+              <div className="w-96 h-96 bg-yellow-500 rounded-full blur-3xl"></div>
+            </div>
+
+            <div className="absolute inset-0 flex items-center justify-center opacity-10 z-0 pointer-events-none">
+              <Sun className="w-96 h-96 text-white rotate-12" />
+            </div>
+
+            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+              <div className="flex-1">
+                <div className="inline-block bg-orange-500/20 text-orange-200 font-bold px-3 py-1 rounded-full text-sm mb-4 backdrop-blur-sm border border-orange-500/30">
+                  ESTATE 2026
+                </div>
+                <h3 className="text-3xl md:text-4xl font-serif font-bold mb-4 text-white">
+                  {SUMMER_PACKAGE.title}
+                </h3>
+                <p className="text-orange-50 text-lg mb-6 max-w-lg">
+                  Siete un gruppo in cerca di fresco e avventura? Vivete il Matese estivo tra escursioni, relax e degustazioni.
+                  Un'esperienza completa e autentica, lontano dal caldo afoso della città.
+                </p>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                  {SUMMER_PACKAGE.features.map((f, i) => (
+                    <div key={i} className="flex items-center gap-2 text-orange-50 font-medium">
+                      <div className="w-2 h-2 bg-orange-400 rounded-full shadow-[0_0_10px_rgba(251,146,60,0.5)]"></div>
+                      {f}
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div className="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center min-w-[280px] shadow-xl">
+                <p className="text-sm text-orange-100 mb-2">A partire da</p>
+                <p className="text-4xl font-bold text-white mb-6">€299<span className="text-lg font-normal text-orange-200">/persona</span></p>
+                <Link
+                  to="/purchase?package=pkg-summer"
+                  className="block text-center w-full py-3 bg-white text-orange-900 font-bold rounded-xl hover:bg-orange-50 transition-colors shadow-lg"
+                >
+                  Richiedi Disponibilità
+                </Link>
+              </div>
             </div>
           </div>
         </div>

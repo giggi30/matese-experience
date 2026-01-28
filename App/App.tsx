@@ -8,11 +8,13 @@ import { Itinerary } from './pages/Itinerary';
 import { Purchase } from './pages/Purchase';
 import { MeteoPage } from './pages/MeteoPage';
 import { ScrollToTop } from './components/ScrollToTop';
+import { ScrollToTopButton } from '../components/ScrollToTopButton';
 
 const App: React.FC = () => {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <ScrollToTopButton />
       <div className="min-h-screen bg-white text-gray-900 font-sans scroll-smooth">
         <Navigation />
         <Routes>

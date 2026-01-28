@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Mountain } from 'lucide-react';
 
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 
 export const Navigation: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
   const isHome = location.pathname === '/';
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export const Navigation: React.FC = () => {
             if (isHome) {
               window.scrollTo({ top: 0, behavior: 'smooth' });
             } else {
-              window.location.href = '/';
+              navigate('/');
             }
             setIsOpen(false);
           }}
@@ -51,23 +52,23 @@ export const Navigation: React.FC = () => {
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               className={`text-sm font-medium hover:opacity-80 transition-colors ${scrolled || !isHome ? 'text-gray-700' : 'text-white/90'}`}
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#packages"
+          <Link
+            to="/#packages"
             className={`px-5 py-2 rounded-full font-semibold text-sm transition-all transform hover:scale-105 ${scrolled || !isHome
               ? 'bg-brand-dark text-white hover:bg-gray-800'
               : 'bg-white text-brand-dark hover:bg-gray-100'
               }`}
           >
             Prenota Ora
-          </a>
+          </Link>
         </div>
 
         {/* Mobile Toggle */}
@@ -87,22 +88,22 @@ export const Navigation: React.FC = () => {
       {isOpen && (
         <div className="absolute top-full left-0 w-full bg-white shadow-xl py-4 flex flex-col items-center md:hidden animate-fade-in-down">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
+              to={link.href}
               onClick={() => setIsOpen(false)}
               className="py-3 text-gray-800 font-medium hover:text-brand-gold w-full text-center"
             >
               {link.name}
-            </a>
+            </Link>
           ))}
-          <a
-            href="#packages"
+          <Link
+            to="/#packages"
             onClick={() => setIsOpen(false)}
             className="mt-4 px-8 py-3 bg-brand-dark text-white rounded-full font-bold"
           >
             Prenota Ora
-          </a>
+          </Link>
         </div>
       )}
     </nav>
